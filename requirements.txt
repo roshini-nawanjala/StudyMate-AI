@@ -7,7 +7,7 @@ langchain-groq==0.3.6
 langchain-openai==0.3.27
 langgraph==0.5.3
 
-chromadb==0.5.23
+chromadb==0.4.24
 sentence-transformers==5.0.0
 
 pymupdf==1.26.3
