@@ -9,9 +9,9 @@ st.set_page_config(
 
 # ---------- Sidebar ----------
 with st.sidebar:
-    st.title("📚 StudyMate AI")
+    st.title("StudyMate AI")
 
-    st.markdown("### 🌐 Language")
+    st.markdown("### Language")
 
     language = st.selectbox(
         "Response Language",
@@ -24,48 +24,48 @@ with st.sidebar:
 
     st.divider()
 
-    st.markdown("### 📄 Session")
+    st.markdown("### Session")
 
     st.info("No document uploaded")
 
-    st.button("🗑 Clear Session", use_container_width=True)
+    st.button("Clear Session", use_container_width=True)
 
 # ---------- Main ----------
-st.title("📚 StudyMate AI")
+st.title("StudyMate AI")
 
 st.caption("An Agentic Learning Assistant")
 
 st.divider()
 
-col1, col2 = st.columns([1,1])
+col1, col2 = st.columns([1, 1])
 
 with col1:
-    st.info("📄 Upload your lecture notes from the sidebar.")
+    st.info("Upload your lecture notes from the Upload page.")
 
 with col2:
-    st.success("🤖 AI Agents are ready.")
+    st.success("AI agents are ready.")
 
 st.markdown("---")
 
-st.subheader("🚀 Available Features")
+st.subheader("Available Features")
 
 c1, c2, c3 = st.columns(3)
 
 with c1:
-    st.container(border=True)
-    st.markdown("### 📚 Summary")
-    st.write("Generate concise notes.")
+    with st.container(border=True):
+        st.subheader("Summary")
+        st.write("Generate concise notes from uploaded lecture materials.")
 
 with c2:
-    st.container(border=True)
-    st.markdown("### ❓ Ask AI")
-    st.write("Ask questions using RAG.")
+    with st.container(border=True):
+        st.subheader("Ask AI")
+        st.write("Ask questions and receive context-aware answers using RAG.")
 
 with c3:
-    st.container(border=True)
-    st.markdown("### 📝 Quiz")
-    st.write("Generate quizzes automatically.")
+    with st.container(border=True):
+        st.subheader("Quiz")
+        st.write("Generate quizzes to assess your understanding.")
 
 st.markdown("---")
 
-st.caption("Version 1.0 | Built with Streamlit + LangGraph + Groq")
+st.caption("Version 1.0 | Powered by Streamlit, LangGraph, Groq and ChromaDB")
