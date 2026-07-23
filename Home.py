@@ -9,7 +9,7 @@ st.set_page_config(
 
 load_css()
 
-st.title("📚 StudyMate AI")
+st.title("StudyMate AI")
 st.subheader("Your AI-Powered Learning Assistant")
 
 st.write(
@@ -30,7 +30,7 @@ with col1:
 
     with st.container(border=True):
 
-        st.subheader("📤 Upload Document")
+        st.subheader("Upload Document")
 
         st.write(
             "Upload lecture notes in PDF format to begin your learning session."
@@ -38,7 +38,7 @@ with col1:
 
     with st.container(border=True):
 
-        st.subheader("📝 AI Summary")
+        st.subheader("AI Summary")
 
         st.write(
             "Generate concise summaries and key points from your uploaded document."
@@ -46,7 +46,7 @@ with col1:
 
     with st.container(border=True):
 
-        st.subheader("💬 Ask AI")
+        st.subheader("Ask AI")
 
         st.write(
             "Ask questions about your lecture notes and receive AI-powered answers."
@@ -56,7 +56,7 @@ with col2:
 
     with st.container(border=True):
 
-        st.subheader("🧠 Quiz Generator")
+        st.subheader("Quiz Generator")
 
         st.write(
             "Generate multiple-choice quizzes to test your understanding."
@@ -64,7 +64,7 @@ with col2:
 
     with st.container(border=True):
 
-        st.subheader("📘 Learning Reflection")
+        st.subheader("Learning Reflection")
 
         st.write(
             "Receive personalized feedback, strengths, weak areas, and study recommendations."
@@ -72,7 +72,7 @@ with col2:
 
     with st.container(border=True):
 
-        st.subheader("🚀 Quick Start")
+        st.subheader("Quick Start")
 
         st.markdown("""
 1. Upload a PDF document.
@@ -85,7 +85,7 @@ with col2:
 st.divider()
 
 st.info(
-    "💡 Tip: Begin by uploading a lecture note from the **Upload** page."
+    "Begin by uploading a lecture note from the **Upload** page."
 )
 
-st.caption("StudyMate AI • Powered by Groq • OpenRouter • ChromaDB • Streamlit")
+st.caption("Powered by Groq • OpenRouter • ChromaDB • Streamlit")
