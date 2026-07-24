@@ -13,7 +13,10 @@ defaults = {
     "score": 0,
     "checked": False,
     "answered_questions": {},
-    "answers": {}      # NEW
+    "answers": {},
+    "quiz_review": None,
+    "review_error": None,
+    "quiz_submitted": False
 }
 
 for k, v in defaults.items():
@@ -40,7 +43,10 @@ with st.sidebar:
             st.session_state.score = 0
             st.session_state.checked = False
             st.session_state.answered_questions = {}
-            st.session_state.answers = {}      # NEW
+            st.session_state.answers = {}
+            st.session_state.quiz_review = None
+            st.session_state.review_error = None
+            st.session_state.quiz_submitted = False
             st.rerun()
         else:
             st.error(result["message"])
@@ -56,7 +62,56 @@ index = st.session_state.current_question
 if index >= total:
     st.header("Quiz Completed")
     st.metric("Score", f"{st.session_state.score}/{total}")
-    st.metric("Percentage", f"{(st.session_state.score/total)*100:.0f}%")
+    percentage = (st.session_state.score / total) * 100 if total else 0
+    st.metric("Percentage", f"{percentage:.0f}%")
+    st.write(f"**Status:** {'PASS' if percentage >= 50 else 'FAIL'}")
+
+    if st.session_state.quiz_review:
+        review = st.session_state.quiz_review
+        st.subheader("Quiz Review")
+
+        for item in review["questions"]:
+            is_correct = item["status"].strip().lower() == "correct"
+            label = "✅ Correct" if is_correct else "❌ Incorrect"
+            with st.expander(f"Question {item['question_number']} — {label}"):
+                if is_correct:
+                    st.success(f"Status: {label}")
+                else:
+                    st.error(f"Status: {label}")
+                st.write(f"**Your Answer:** {item['your_answer']}")
+                st.write(f"**Correct Answer:** {item['correct_answer']}")
+                st.write(f"**Explanation:** {item['explanation']}")
+
+        report = review["overall_learning_report"]
+        st.subheader("Overall Learning Report")
+        for title, key in [
+            ("Overall Performance", "overall_performance"),
+            ("Strengths", "strengths"),
+            ("Weak Areas", "weak_areas"),
+            ("Topics To Revise", "topics_to_revise"),
+            ("Study Recommendations", "study_recommendations"),
+            ("Motivational Feedback", "motivational_feedback"),
+            ("Estimated Readiness Level", "estimated_readiness_level")
+        ]:
+            st.write(f"**{title}:** {report[key]}")
+
+    if st.session_state.review_error:
+        st.error(st.session_state.review_error)
+
+    if not st.session_state.quiz_submitted:
+        if st.button("Submit Quiz", use_container_width=True):
+            result = service.review_quiz(
+                quiz,
+                st.session_state.answers,
+                provider=provider
+            )
+            if result["success"]:
+                st.session_state.quiz_review = result["review"]
+                st.session_state.review_error = None
+                st.session_state.quiz_submitted = True
+            else:
+                st.session_state.review_error = result["message"]
+            st.rerun()
 
     if st.button("Generate New Quiz"):
         for k, v in defaults.items():
@@ -120,14 +175,25 @@ with c2:
             st.session_state.checked = False
             st.rerun()
     else:
-        if st.button("Finish Quiz"):
+        all_answered = len(st.session_state.answers) == total
 
-            score = 0
+        if not all_answered:
+            st.caption("Answer every question before submitting the quiz.")
 
-            for i, question in enumerate(quiz):
-                if st.session_state.answers.get(i) == question["answer"]:
-                    score += 1
-
-            st.session_state.score = score
+        if st.button("Submit Quiz", disabled=not all_answered):
+            score_result = service.calculate_score(quiz, st.session_state.answers)
+            st.session_state.score = score_result["score"]
             st.session_state.current_question = total
+            review_result = service.review_quiz(
+                quiz,
+                st.session_state.answers,
+                provider=provider
+            )
+            if review_result["success"]:
+                st.session_state.quiz_review = review_result["review"]
+                st.session_state.review_error = None
+                st.session_state.quiz_submitted = True
+            else:
+                st.session_state.quiz_review = None
+                st.session_state.review_error = review_result["message"]
             st.rerun()
