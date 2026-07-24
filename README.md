@@ -198,14 +198,19 @@ streamlit run Home.py
 
 ---
 
-# Usage
+## Usage
 
-1. Launch the application.
-2. Upload a PDF lecture note.
-3. Wait until indexing is completed.
-4. Select one of the AI learning tools.
-5. Receive AI-generated results.
-
+1. Launch the Streamlit application.
+2. Navigate to the **Upload** page.
+3. Upload a PDF lecture note.
+4. Wait for the document to be processed, chunked, and indexed in the ChromaDB vector database.
+5. Choose one of the available learning tools:
+   - Summary
+   - Ask AI
+   - Quiz
+   - Reflection
+6. Select an AI provider (Auto, Groq, or OpenRouter) if required.
+7. Review the AI-generated results based on the uploaded lecture content.
 ---
 
 # Environment Variables
