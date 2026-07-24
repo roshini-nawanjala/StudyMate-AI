@@ -1,4 +1,4 @@
-# 📚 StudyMate AI
+# StudyMate AI
 
 ### An Agentic AI Learning Assistant using Retrieval-Augmented Generation (RAG) and Large Language Models
 
@@ -13,7 +13,7 @@ StudyMate AI is an intelligent learning assistant developed using **Streamlit**,
 
 ---
 
-# 🚀 Live Demo
+# Live Demo
 
 **StudyMate AI**
 
@@ -21,13 +21,13 @@ https://studymate-agent.streamlit.app/
 
 ---
 
-# 💻 GitHub Repository
+# GitHub Repository
 
 https://github.com/roshini-nawanjala/StudyMate-AI
 
 ---
 
-# 📑 Table of Contents
+# Table of Contents
 
 - Features
 - Technology Stack
@@ -45,7 +45,7 @@ https://github.com/roshini-nawanjala/StudyMate-AI
 
 ---
 
-# ✨ Features
+# Features
 
 - Upload lecture notes in PDF format
 - Automatic PDF text extraction
@@ -62,7 +62,7 @@ https://github.com/roshini-nawanjala/StudyMate-AI
 
 ---
 
-# 🛠 Technology Stack
+# Technology Stack
 
 ## Frontend
 
@@ -99,7 +99,7 @@ https://github.com/roshini-nawanjala/StudyMate-AI
 
 ---
 
-# 🏗 System Architecture
+# System Architecture
 
 The following architecture illustrates the overall workflow of StudyMate AI, including the Presentation Layer, Business Logic Layer, Retrieval-Augmented Generation pipeline, AI providers, and ChromaDB vector database.
 
@@ -107,7 +107,7 @@ The following architecture illustrates the overall workflow of StudyMate AI, inc
 
 ---
 
-# 🤖 How StudyMate AI Works
+# How StudyMate AI Works
 
 The application follows a Retrieval-Augmented Generation (RAG) workflow.
 
@@ -124,7 +124,7 @@ The application follows a Retrieval-Augmented Generation (RAG) workflow.
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```text
 StudyMate-AI/
@@ -150,7 +150,7 @@ StudyMate-AI/
 
 ---
 
-# ⚙ Installation
+# Installation
 
 Clone the repository
 
@@ -198,7 +198,7 @@ streamlit run Home.py
 
 ---
 
-# 🚀 Usage
+# Usage
 
 1. Launch the application.
 2. Upload a PDF lecture note.
@@ -208,7 +208,7 @@ streamlit run Home.py
 
 ---
 
-# 🔑 Environment Variables
+# Environment Variables
 
 Create a `.env` file.
 
@@ -220,9 +220,9 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 
 ---
 
-# 📸 Application Screenshots
+# Application Screenshots
 
-## 🏠 Home Page
+## Home Page
 
 The main dashboard provides quick access to all AI learning tools.
 
@@ -230,7 +230,7 @@ The main dashboard provides quick access to all AI learning tools.
 
 ---
 
-## 📄 Upload Page
+## Upload Page
 
 Upload lecture notes for AI-powered processing.
 
@@ -238,7 +238,7 @@ Upload lecture notes for AI-powered processing.
 
 ---
 
-## 📝 Document Summary
+## Document Summary
 
 Generate concise AI-powered summaries.
 
@@ -246,7 +246,7 @@ Generate concise AI-powered summaries.
 
 ---
 
-## 💬 Ask AI
+## Ask AI
 
 Ask questions about uploaded lecture notes using Retrieval-Augmented Generation.
 
@@ -254,7 +254,7 @@ Ask questions about uploaded lecture notes using Retrieval-Augmented Generation.
 
 ---
 
-## ❓ AI Quiz Generator
+## AI Quiz Generator
 
 Automatically generate quizzes from uploaded documents.
 
@@ -262,7 +262,7 @@ Automatically generate quizzes from uploaded documents.
 
 ---
 
-## 📖 AI Learning Reflection
+## AI Learning Reflection
 
 Receive personalized study feedback and recommendations.
 
@@ -270,7 +270,7 @@ Receive personalized study feedback and recommendations.
 
 ---
 
-# ⚠ Known Limitations
+# Known Limitations
 
 - PDF documents only
 - Internet connection required
@@ -281,7 +281,7 @@ Receive personalized study feedback and recommendations.
 
 ---
 
-# 🚀 Future Improvements
+# Future Improvements
 
 - Multi-document support
 - OCR integration
@@ -294,7 +294,7 @@ Receive personalized study feedback and recommendations.
 
 ---
 
-# 👩‍💻 Author
+# Author
 
 **Roshini Nawanjala**
 
@@ -308,7 +308,7 @@ https://github.com/roshini-nawanjala
 
 ---
 
-# 📄 License
+# License
 
 This project was developed for academic and educational purposes.
 
