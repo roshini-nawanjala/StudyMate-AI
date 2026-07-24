@@ -1,82 +1,139 @@
-# StudyMate AI
+# 📚 StudyMate AI
 
-## Overview
+### An Agentic AI Learning Assistant using Retrieval-Augmented Generation (RAG) and Large Language Models
 
-StudyMate AI is an AI-powered learning assistant developed to improve the study experience of university students. The application allows users to upload lecture notes in PDF format and interact with the content using Artificial Intelligence. Instead of reading lengthy documents manually, students can generate summaries, ask questions, create quizzes, and reflect on their understanding through an interactive interface.
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.46-red?style=for-the-badge&logo=streamlit)
+![LangChain](https://img.shields.io/badge/LangChain-Agentic-green?style=for-the-badge)
+![LangGraph](https://img.shields.io/badge/LangGraph-Workflow-orange?style=for-the-badge)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorDB-purple?style=for-the-badge)
+![RAG](https://img.shields.io/badge/RAG-Enabled-success?style=for-the-badge)
 
-The project is built using Python and Streamlit with Retrieval-Augmented Generation (RAG) to provide context-aware responses based on uploaded documents.
-
----
-
-## Objectives
-
-The main objectives of this project are:
-
-- Simplify learning from lecture notes
-- Generate concise AI-powered summaries
-- Answer questions using uploaded documents
-- Create quizzes for self-assessment
-- Encourage reflective learning
-- Demonstrate the practical use of Large Language Models in education
+StudyMate AI is an intelligent learning assistant developed using **Streamlit**, **LangChain**, **LangGraph**, and **Large Language Models (LLMs)**. The application enables students to upload lecture notes, generate AI-powered summaries, ask context-aware questions, create quizzes, and receive personalized learning reflections through a Retrieval-Augmented Generation (RAG) pipeline.
 
 ---
 
-## Features
+# 🚀 Live Demo
+
+**StudyMate AI**
+
+https://studymate-agent.streamlit.app/
+
+---
+
+# 💻 GitHub Repository
+
+https://github.com/roshini-nawanjala/StudyMate-AI
+
+---
+
+# 📑 Table of Contents
+
+- Features
+- Technology Stack
+- System Architecture
+- RAG Workflow
+- Project Structure
+- Installation
+- Usage
+- Environment Variables
+- Screenshots
+- Known Limitations
+- Future Improvements
+- Author
+- License
+
+---
+
+# ✨ Features
 
 - Upload lecture notes in PDF format
-- Automatic text extraction and preprocessing
+- Automatic PDF text extraction
 - Intelligent document chunking
-- Vector database using ChromaDB
+- Retrieval-Augmented Generation (RAG)
 - AI-generated document summaries
-- Context-aware question answering using RAG
-- Automatic quiz generation
-- Quiz scoring
-- Learning reflection module
-- Clean and user-friendly interface
+- Context-aware Question Answering
+- AI Quiz Generation
+- Personalized Learning Reflection
+- ChromaDB vector storage
+- Sentence Transformer embeddings
+- Multi-agent architecture
+- Support for Groq and OpenRouter
 
 ---
 
-## Technologies Used
+# 🛠 Technology Stack
 
-### Programming Language
-
-- Python 3.12
-
-### Framework
+## Frontend
 
 - Streamlit
 
-### AI & Machine Learning
+## Backend
+
+- Python
+
+## AI Framework
 
 - LangChain
-- OpenRouter API
-- Groq API
-- Sentence Transformers
+- LangGraph
 
-### Vector Database
+## Language Models
+
+- Groq API
+- OpenRouter API
+
+## Vector Database
 
 - ChromaDB
 
-### PDF Processing
+## Embedding Model
+
+- Sentence Transformers
+
+## Supporting Libraries
 
 - PyMuPDF
 - PyPDF
-
-### Other Libraries
-
 - python-dotenv
 - tiktoken
 
 ---
 
-## Project Structure
+# 🏗 System Architecture
 
-```
+The following architecture illustrates the overall workflow of StudyMate AI, including the Presentation Layer, Business Logic Layer, Retrieval-Augmented Generation pipeline, AI providers, and ChromaDB vector database.
+
+![System Architecture](assets/screenshots/architecture.png)
+
+---
+
+# 🤖 How StudyMate AI Works
+
+The application follows a Retrieval-Augmented Generation (RAG) workflow.
+
+1. User uploads a lecture note.
+2. PDF text is extracted using PyMuPDF.
+3. Text is divided into chunks.
+4. Sentence Transformer generates embeddings.
+5. Embeddings are stored in ChromaDB.
+6. User selects a learning feature.
+7. Retrieval Agent performs similarity search.
+8. Relevant document chunks are retrieved.
+9. Context is sent to Groq or OpenRouter.
+10. AI generates the final response.
+
+---
+
+# 📂 Project Structure
+
+```text
 StudyMate-AI/
 │
 ├── agents/
+├── assets/
 ├── components/
 ├── data/
+├── models/
 ├── pages/
 ├── prompts/
 ├── rag/
@@ -84,8 +141,8 @@ StudyMate-AI/
 ├── tests/
 ├── utils/
 │
-├── Home.py
 ├── app.py
+├── Home.py
 ├── config.py
 ├── requirements.txt
 └── README.md
@@ -93,50 +150,47 @@ StudyMate-AI/
 
 ---
 
-## Installation
+# ⚙ Installation
 
-Clone the repository.
+Clone the repository
 
 ```bash
 git clone https://github.com/roshini-nawanjala/StudyMate-AI.git
 ```
 
-Move into the project folder.
+Move into the project
 
 ```bash
 cd StudyMate-AI
 ```
 
-Create a virtual environment.
+Create virtual environment
 
 ```bash
-python -m venv .venv
+python -m venv venv
 ```
 
-Activate the virtual environment.
+Activate environment
 
 Windows
 
 ```bash
-.venv\Scripts\activate
+venv\Scripts\activate
 ```
 
-Install the required packages.
+Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+Install packages
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file and add your API keys.
-
-Example:
-
-```
-GROQ_API_KEY=your_groq_api_key
-OPENROUTER_API_KEY=your_openrouter_api_key
-```
-
-Run the application.
+Run the application
 
 ```bash
 streamlit run Home.py
@@ -144,48 +198,103 @@ streamlit run Home.py
 
 ---
 
-## How the System Works
+# 🚀 Usage
 
-1. Upload a lecture note in PDF format.
-2. The document is processed and converted into text.
-3. The text is divided into meaningful chunks.
-4. Embeddings are generated and stored in ChromaDB.
-5. Users can generate summaries.
-6. Users can ask questions related to the uploaded document.
-7. The system retrieves relevant content using RAG before generating responses.
-8. Users can generate quizzes and receive scores.
-9. The reflection module helps users evaluate their learning.
+1. Launch the application.
+2. Upload a PDF lecture note.
+3. Wait until indexing is completed.
+4. Select one of the AI learning tools.
+5. Receive AI-generated results.
 
 ---
 
-## Testing
+# 🔑 Environment Variables
 
-The project includes unit tests for the core RAG components.
+Create a `.env` file.
 
-Test coverage includes:
+```env
+GROQ_API_KEY=your_groq_api_key
 
-- Chunking
-- Embeddings
-- Vector Store
-- PDF Loader
-
----
-
-## Future Improvements
-
-Possible future enhancements include:
-
-- Support for DOCX and PowerPoint files
-- Voice-based interaction
-- Multi-document knowledge base
-- Personalized study recommendations
-- User authentication
-- Learning progress dashboard
-- Cloud deployment
+OPENROUTER_API_KEY=your_openrouter_api_key
+```
 
 ---
 
-## Author
+# 📸 Application Screenshots
+
+## 🏠 Home Page
+
+The main dashboard provides quick access to all AI learning tools.
+
+![Home](assets/screenshots/home.png)
+
+---
+
+## 📄 Upload Page
+
+Upload lecture notes for AI-powered processing.
+
+![Upload](assets/screenshots/upload.png)
+
+---
+
+## 📝 Document Summary
+
+Generate concise AI-powered summaries.
+
+![Summary](assets/screenshots/summary.png)
+
+---
+
+## 💬 Ask AI
+
+Ask questions about uploaded lecture notes using Retrieval-Augmented Generation.
+
+![Ask AI](assets/screenshots/ask-ai.png)
+
+---
+
+## ❓ AI Quiz Generator
+
+Automatically generate quizzes from uploaded documents.
+
+![Quiz](assets/screenshots/quiz.png)
+
+---
+
+## 📖 AI Learning Reflection
+
+Receive personalized study feedback and recommendations.
+
+![Reflection](assets/screenshots/reflection.png)
+
+---
+
+# ⚠ Known Limitations
+
+- PDF documents only
+- Internet connection required
+- API keys required
+- OCR is not supported
+- Large PDFs require more processing time
+- Single document session
+
+---
+
+# 🚀 Future Improvements
+
+- Multi-document support
+- OCR integration
+- Chat history
+- Authentication
+- Cloud storage
+- Learning analytics
+- Export summaries
+- Mobile responsiveness
+
+---
+
+# 👩‍💻 Author
 
 **Roshini Nawanjala**
 
@@ -193,4 +302,16 @@ Faculty of Information Technology
 
 Horizon Campus
 
-Sri Lanka
+GitHub
+
+https://github.com/roshini-nawanjala
+
+---
+
+# 📄 License
+
+This project was developed for academic and educational purposes.
+
+---
+
+## ⭐ If you found this project useful, don't forget to give it a star!
