@@ -11,9 +11,17 @@ def load_css():
            GLOBAL
         ====================================== */
 
-        html, body, [class*="css"]{
+        html,
+        body {
+
             font-family: "Segoe UI", sans-serif;
-            background:#F8FAFC;
+
+        }
+
+        .stApp {
+
+         font-family: "Segoe UI", sans-serif;
+  
         }
 
         .block-container{
@@ -61,13 +69,13 @@ def load_css():
            SIDEBAR
         ====================================== */
 
-        section[data-testid="stSidebar"]{
+    section[data-testid="stSidebar"]{
 
-            background:#FFFFFF;
+        background:#FFFFFF;
 
-            border-right:1px solid #E5E7EB;
+        border-right:1px solid #E5E7EB;
 
-        }
+    }
 
         section[data-testid="stSidebar"] h1,
         section[data-testid="stSidebar"] h2,
