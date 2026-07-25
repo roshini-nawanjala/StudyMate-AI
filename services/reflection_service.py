@@ -1,3 +1,5 @@
+import json
+
 from rag.vector_store import VectorStore
 from agents.ai_provider import AIProvider
 
@@ -8,7 +10,16 @@ class ReflectionService:
         self.vector_store = VectorStore()
         self.ai_provider = AIProvider()
 
-    def generate_reflection(self, provider="auto", quiz_score=None, total_questions=None):
+    def generate_reflection(
+        self,
+        provider="auto",
+        quiz_score=None,
+        total_questions=None,
+        quiz_percentage=None,
+        quiz_status=None,
+        quiz_review=None,
+        overall_performance_summary=None
+    ):
 
         try:
 
@@ -28,13 +39,31 @@ class ReflectionService:
             llm = self.ai_provider.get_llm(provider)
 
             if quiz_score is not None and total_questions is not None:
+                percentage = (
+                    quiz_percentage
+                    if quiz_percentage is not None
+                    else (quiz_score / total_questions) * 100
+                )
                 performance = f"""
 Quiz Performance:
 - Score: {quiz_score}/{total_questions}
-- Percentage: {(quiz_score / total_questions) * 100:.0f}%
+- Percentage: {percentage:.0f}%
+- Status: {quiz_status or ('PASS' if percentage >= 50 else 'FAIL')}
 """
             else:
                 performance = "Quiz Performance: Not Available"
+
+            review_context = ""
+            if quiz_review:
+                review_context = (
+                    "\nExisting AI Quiz Review (reuse these insights where relevant):\n"
+                    f"{json.dumps(quiz_review, ensure_ascii=False)}\n"
+                )
+            if overall_performance_summary:
+                review_context += (
+                    "\nOverall Performance Summary:\n"
+                    f"{overall_performance_summary}\n"
+                )
 
             prompt = f"""
 You are an intelligent AI Study Coach.
@@ -42,6 +71,7 @@ You are an intelligent AI Study Coach.
 Analyze the following lecture notes and the student's quiz performance.
 
 {performance}
+{review_context}
 
 Generate a personalized learning reflection using the following format.
 

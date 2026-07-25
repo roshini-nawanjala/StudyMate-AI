@@ -73,28 +73,17 @@ else:
 
 st.divider()
 
-# ---------------------------------------------------
-# Options
-# ---------------------------------------------------
+provider = DEFAULT_PROVIDER
 
-provider = st.selectbox(
-    "AI Provider",
-    [
-        "auto",
-        "groq",
-        "openrouter"
-    ],
-    index=[
-        "auto",
-        "groq",
-        "openrouter"
-    ].index(DEFAULT_PROVIDER)
-)
+button_col1, button_col2, button_col3 = st.columns([1, 0.5, 1])
 
-if st.button(
-    "Generate Summary",
-    use_container_width=True
-):
+with button_col2:
+    generate_summary = st.button(
+        "Generate Summary",
+        use_container_width=True
+    )
+
+if generate_summary:
 
     with st.spinner("Generating summary..."):
 
