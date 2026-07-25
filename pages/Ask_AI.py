@@ -27,19 +27,7 @@ if "messages" not in st.session_state:
 # Sidebar
 # -----------------------------
 with st.sidebar:
-
-    st.header("⚙ AI Settings")
-
-    provider = st.selectbox(
-        "AI Provider",
-        [
-            "auto",
-            "groq",
-            "openrouter"
-        ]
-    )
-
-    st.divider()
+    provider = "auto"
 
     st.subheader("💡 Suggested Questions")
 
