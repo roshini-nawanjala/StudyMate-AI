@@ -9,7 +9,11 @@
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorDB-purple?style=for-the-badge)
 ![RAG](https://img.shields.io/badge/RAG-Enabled-success?style=for-the-badge)
 
-StudyMate AI is an intelligent learning assistant developed using **Streamlit**, **LangChain**, **LangGraph**, and **Large Language Models (LLMs)**. The application enables students to upload lecture notes, generate AI-powered summaries, ask context-aware questions, create quizzes, and receive personalized learning reflections through a Retrieval-Augmented Generation (RAG) pipeline.
+StudyMate AI is an AI-powered learning assistant developed using **Streamlit**, **LangChain**, **LangGraph**, and **Large Language Models (LLMs)**. The application leverages a **Retrieval-Augmented Generation (RAG)** architecture to help students interact with lecture materials more effectively.
+
+Users can upload lecture notes in PDF format, generate concise AI-powered summaries, ask context-aware questions, create quizzes, receive automatic quiz reviews with performance feedback, and generate personalized learning reflections based on their quiz results.
+
+The application combines semantic document retrieval using **ChromaDB** with modern language models to deliver accurate, context-aware, and interactive learning support through a clean and user-friendly interface.
 
 ---
 
@@ -25,42 +29,23 @@ https://studymate-agent.streamlit.app/
 
 https://github.com/roshini-nawanjala/StudyMate-AI
 
----
-
-# Table of Contents
-
-- Features
-- Technology Stack
-- System Architecture
-- RAG Workflow
-- Project Structure
-- Installation
-- Usage
-- Environment Variables
-- Screenshots
-- Known Limitations
-- Future Improvements
-- Author
-- License
-
----
-
 # Features
 
 - Upload lecture notes in PDF format
-- Automatic PDF text extraction
-- Intelligent document chunking
-- Retrieval-Augmented Generation (RAG)
-- AI-generated document summaries
-- Context-aware Question Answering
-- AI Quiz Generation
-- Personalized Learning Reflection
-- ChromaDB vector storage
-- Sentence Transformer embeddings
-- Multi-agent architecture
-- Support for Groq and OpenRouter
-
----
+- Automatic PDF text extraction using PyMuPDF
+- Intelligent document chunking for semantic retrieval
+- Retrieval-Augmented Generation (RAG) for context-aware responses
+- AI-powered document summarization
+- Context-aware question answering based on uploaded documents
+- AI-generated quizzes from lecture content
+- Automatic quiz scoring and performance evaluation
+- AI-generated quiz review with detailed explanations
+- Personalized learning reflections based on quiz performance
+- Semantic document retrieval using ChromaDB
+- Sentence Transformer embeddings for similarity search
+- Multi-agent workflow powered by LangGraph
+- Automatic AI provider selection through internal routing
+- Clean and user-friendly Streamlit interface
 
 # Technology Stack
 
@@ -70,17 +55,21 @@ https://github.com/roshini-nawanjala/StudyMate-AI
 
 ## Backend
 
-- Python
+- Python 3.12
 
 ## AI Framework
 
 - LangChain
 - LangGraph
 
-## Language Models
+## Large Language Models (LLMs)
 
-- Groq API
-- OpenRouter API
+- Groq
+- OpenRouter
+
+## Retrieval System
+
+- Retrieval-Augmented Generation (RAG)
 
 ## Vector Database
 
@@ -88,20 +77,30 @@ https://github.com/roshini-nawanjala/StudyMate-AI
 
 ## Embedding Model
 
-- Sentence Transformers
+- Sentence Transformers (all-MiniLM-L6-v2)
 
-## Supporting Libraries
+## PDF Processing
 
 - PyMuPDF
 - PyPDF
+
+## Supporting Libraries
+
 - python-dotenv
 - tiktoken
 
----
-
 # System Architecture
 
-The following architecture illustrates the overall workflow of StudyMate AI, including the Presentation Layer, Business Logic Layer, Retrieval-Augmented Generation pipeline, AI providers, and ChromaDB vector database.
+StudyMate AI follows an Agentic Retrieval-Augmented Generation (RAG) architecture that combines document processing, semantic retrieval, vector storage, and Large Language Models to provide intelligent learning assistance.
+
+The system consists of four main layers:
+
+- **Presentation Layer** – Streamlit-based user interface for interacting with learning features.
+- **Application Layer** – Coordinates document processing, retrieval, quiz generation, summaries, and reflections.
+- **Retrieval Layer** – Performs semantic similarity search using ChromaDB and Sentence Transformer embeddings.
+- **AI Layer** – Automatically routes requests to the configured Large Language Model for response generation.
+
+The architecture below illustrates the overall workflow of the application.
 
 ![System Architecture](assets/screenshots/architecture.png)
 
@@ -109,42 +108,81 @@ The following architecture illustrates the overall workflow of StudyMate AI, inc
 
 # How StudyMate AI Works
 
-The application follows a Retrieval-Augmented Generation (RAG) workflow.
+The application follows a Retrieval-Augmented Generation (RAG) workflow to generate accurate, context-aware learning assistance.
 
-1. User uploads a lecture note.
-2. PDF text is extracted using PyMuPDF.
-3. Text is divided into chunks.
-4. Sentence Transformer generates embeddings.
-5. Embeddings are stored in ChromaDB.
-6. User selects a learning feature.
-7. Retrieval Agent performs similarity search.
-8. Relevant document chunks are retrieved.
-9. Context is sent to Groq or OpenRouter.
-10. AI generates the final response.
+1. The user uploads a lecture note in PDF format.
+2. The PDF content is extracted using **PyMuPDF**.
+3. The extracted text is divided into smaller semantic chunks.
+4. Sentence Transformer generates vector embeddings for each chunk.
+5. The embeddings are stored in **ChromaDB** for semantic retrieval.
+6. The user selects one of the available learning tools:
+   - Summary
+   - Ask AI
+   - Quiz
+   - Reflection
+7. The Retrieval Agent performs semantic similarity search to identify the most relevant document chunks.
+8. The retrieved context is combined with the user's request.
+9. The application automatically selects the configured AI provider through internal routing.
+10. The selected Large Language Model generates a context-aware response.
+11. The generated response is presented to the user through the Streamlit interface.
 
 ---
 
+# Learning Workflow
+
+The complete learning workflow is illustrated below.
+
+```text
+              Upload PDF
+                   │
+                   ▼
+        Extract & Chunk Document
+                   │
+                   ▼
+      Generate Vector Embeddings
+                   │
+                   ▼
+      Store Embeddings in ChromaDB
+                   │
+                   ▼
+      Choose Learning Feature
+                   │
+   ┌───────────┬───────────┬───────────┐
+   ▼           ▼           ▼           ▼
+Summary      Ask AI      Quiz     Reflection
+                │
+                ▼
+        Retrieve Relevant Context
+                │
+                ▼
+     Automatic AI Provider Routing
+                │
+                ▼
+      Generate Context-Aware Response
+```
 # Project Structure
 
 ```text
 StudyMate-AI/
 │
-├── agents/
-├── assets/
-├── components/
-├── data/
-├── models/
-├── pages/
-├── prompts/
-├── rag/
-├── services/
-├── tests/
-├── utils/
+├── agents/                 # Agent workflow components
+├── assets/                 # Images and screenshots
+│   └── screenshots/
+├── components/             # Reusable UI components
+├── data/                   # ChromaDB storage and uploaded data
+├── models/                 # Embedding models and AI configuration
+├── pages/                  # Streamlit application pages
+├── prompts/                # Prompt templates
+├── rag/                    # Retrieval-Augmented Generation pipeline
+├── services/               # Business logic and AI services
+├── tests/                  # Testing modules
+├── utils/                  # Utility functions
 │
-├── app.py
-├── Home.py
-├── config.py
-├── requirements.txt
+├── app.py                  # Main application entry point
+├── Home.py                 # Home page
+├── config.py               # Configuration settings
+├── requirements.txt        # Project dependencies
+├── .env.example            # Environment variable template
 └── README.md
 ```
 
@@ -152,84 +190,94 @@ StudyMate-AI/
 
 # Installation
 
-Clone the repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/roshini-nawanjala/StudyMate-AI.git
 ```
 
-Move into the project
+## Navigate to the Project Directory
 
 ```bash
 cd StudyMate-AI
 ```
 
-Create virtual environment
+## Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate environment
+## Activate the Virtual Environment
 
-Windows
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Linux / macOS
+### Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-Install packages
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application
+## Configure Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+GROQ_API_KEY=your_groq_api_key
+OPENROUTER_API_KEY=your_openrouter_api_key
+```
+
+## Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
+The application will be available at:
+
+```text
+http://localhost:8501
+```
+
 ---
 
-## Usage
+# Usage
 
-1. Launch the Streamlit application.
-2. Navigate to the **Upload** page.
-3. Upload a PDF lecture note.
-4. Wait for the document to be processed, chunked, and indexed in the ChromaDB vector database.
+1. Launch the StudyMate AI application.
+2. Open the **Upload** page.
+3. Upload a lecture note in PDF format.
+4. Wait until the document is processed and indexed in ChromaDB.
 5. Choose one of the available learning tools:
    - Summary
    - Ask AI
    - Quiz
    - Reflection
-6. Select an AI provider (Auto, Groq, or OpenRouter) if required.
-7. Review the AI-generated results based on the uploaded lecture content.
----
+6. Generate AI-powered learning content based on the uploaded document.
+7. Complete the quiz and submit your answers.
+8. Review the AI-generated quiz evaluation and explanations.
+9. Generate a personalized learning reflection based on your quiz performance.
 
-# Environment Variables
-
-Create a `.env` file.
-
-```env
-GROQ_API_KEY=your_groq_api_key
-
-OPENROUTER_API_KEY=your_openrouter_api_key
-```
-
----
+> **Note:** AI provider selection is handled automatically by the application. Users do not need to configure or select an AI provider manually.
 
 # Application Screenshots
 
+The following screenshots demonstrate the key features and user interface of StudyMate AI.
+
+---
+
 ## Home Page
 
-The main dashboard provides quick access to all AI learning tools.
+The home page provides an overview of the application and quick access to all learning features.
 
 ![Home](assets/screenshots/home.png)
 
@@ -237,7 +285,7 @@ The main dashboard provides quick access to all AI learning tools.
 
 ## Upload Page
 
-Upload lecture notes for AI-powered processing.
+Upload lecture notes in PDF format. The application extracts the document content, generates semantic chunks, and stores vector embeddings in ChromaDB for efficient retrieval.
 
 ![Upload](assets/screenshots/upload.png)
 
@@ -245,7 +293,7 @@ Upload lecture notes for AI-powered processing.
 
 ## Document Summary
 
-Generate concise AI-powered summaries.
+Generate concise AI-powered summaries from uploaded lecture notes, helping students quickly understand the main concepts before studying in detail.
 
 ![Summary](assets/screenshots/summary.png)
 
@@ -253,23 +301,23 @@ Generate concise AI-powered summaries.
 
 ## Ask AI
 
-Ask questions about uploaded lecture notes using Retrieval-Augmented Generation.
+Interact with the uploaded document through context-aware question answering powered by Retrieval-Augmented Generation (RAG).
 
 ![Ask AI](assets/screenshots/ask-ai.png)
 
 ---
 
-## AI Quiz Generator
+## AI Quiz
 
-Automatically generate quizzes from uploaded documents.
+Generate multiple-choice quizzes directly from the uploaded lecture material. The application automatically evaluates answers and provides AI-generated explanations and performance feedback.
 
 ![Quiz](assets/screenshots/quiz.png)
 
 ---
 
-## AI Learning Reflection
+## Learning Reflection
 
-Receive personalized study feedback and recommendations.
+Generate a personalized learning reflection based on quiz performance, helping students identify strengths, weaknesses, and areas for further improvement.
 
 ![Reflection](assets/screenshots/reflection.png)
 
@@ -277,25 +325,31 @@ Receive personalized study feedback and recommendations.
 
 # Known Limitations
 
-- PDF documents only
-- Internet connection required
-- API keys required
-- OCR is not supported
-- Large PDFs require more processing time
-- Single document session
+The current version of StudyMate AI has the following limitations:
+
+- Supports PDF documents only
+- Requires an active internet connection
+- Requires valid API keys for AI services
+- OCR is not supported for scanned PDF documents
+- Large PDF files may require additional processing time
+- Supports one uploaded document at a time
 
 ---
 
 # Future Improvements
 
-- Multi-document support
-- OCR integration
-- Chat history
-- Authentication
-- Cloud storage
-- Learning analytics
-- Export summaries
-- Mobile responsiveness
+The following enhancements are planned for future versions of the project:
+
+- Support for multiple document uploads
+- OCR support for scanned documents
+- User authentication and profile management
+- Conversation history
+- Cloud-based document storage
+- Learning analytics dashboard
+- Export summaries, quizzes, and reflections
+- Mobile-responsive user interface
+- Citation-aware AI responses
+- Multi-language support
 
 ---
 
@@ -303,11 +357,10 @@ Receive personalized study feedback and recommendations.
 
 **Roshini Nawanjala**
 
-Faculty of Information Technology
-
+Faculty of Information Technology  
 Horizon Campus
 
-GitHub
+GitHub Profile
 
 https://github.com/roshini-nawanjala
 
@@ -319,4 +372,17 @@ This project was developed for academic and educational purposes.
 
 ---
 
-## ⭐ If you found this project useful, don't forget to give it a star!
+## Acknowledgements
+
+This project was developed using the following open-source technologies:
+
+- Streamlit
+- LangChain
+- LangGraph
+- ChromaDB
+- Sentence Transformers
+- PyMuPDF
+- Groq
+- OpenRouter
+
+Special thanks to the developers and maintainers of these projects for providing powerful open-source tools that made this project possible.
