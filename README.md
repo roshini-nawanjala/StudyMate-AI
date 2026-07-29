@@ -194,36 +194,11 @@ After a student submits a quiz, the Quiz Agent evaluates the answers, calculates
 
 Instead of recalculating quiz statistics, the Reflection Agent consumes this message directly to generate personalized learning feedback. This approach establishes a clear communication protocol between independent agents while preserving separation of responsibilities.
 
-The communication workflow is illustrated below.
+## Agent-to-Agent Communication Workflow
 
-```mermaid
-sequenceDiagram
-    participant Student
-    participant QuizAgent
-    participant ReflectionAgent
-    participant RAG
+StudyMate AI implements structured agent-to-agent communication between the Quiz Agent and the Reflection Agent using a `QuizResultMessage` contract.
 
-    Student->>QuizAgent: Submit quiz answers
-
-    QuizAgent->>QuizAgent: Evaluate answers
-
-    QuizAgent->>QuizAgent: Calculate score
-
-    QuizAgent->>QuizAgent: Identify strengths and weaknesses
-
-    QuizAgent->>ReflectionAgent: QuizResultMessage
-
-    Note over QuizAgent,ReflectionAgent:
-    Structured machine-readable message
-
-    ReflectionAgent->>RAG: Retrieve relevant lecture context
-
-    RAG-->>ReflectionAgent: Relevant document chunks
-
-    ReflectionAgent->>ReflectionAgent: Generate personalized reflection
-
-    ReflectionAgent-->>Student: Learning reflection
-```
+![Agent Communication Workflow](assets/screenshots/agent-communication-workflow.png)
 
 ## QuizResultMessage Structure
 
