@@ -11,7 +11,7 @@ st.set_page_config(
 
 service = ChatService()
 
-st.title("🤖 Ask Your Lecture Notes")
+st.title("Ask Your Lecture Notes")
 
 st.write(
     "Ask questions about your uploaded lecture notes using AI."

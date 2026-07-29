@@ -22,7 +22,7 @@ class SummaryService:
 
             text = "\n\n".join(documents)
 
-            llm = self.ai_provider.get_llm(provider)
+            llm = self.ai_provider.get_llm(provider=provider, task="summary")
 
             prompt = f"""
 You are an expert study assistant.
