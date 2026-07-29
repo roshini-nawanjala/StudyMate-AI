@@ -198,26 +198,20 @@ The communication workflow is illustrated below.
 
 ```mermaid
 sequenceDiagram
-    participant Student
-    participant QuizAgent
-    participant ReflectionAgent
-    participant RAG
+    participant S as Student
+    participant Q as QuizAgent
+    participant R as ReflectionAgent
+    participant K as RAG
 
-    Student->>QuizAgent: Submit quiz answers
-
-    QuizAgent->>QuizAgent: Evaluate answers
-    QuizAgent->>QuizAgent: Calculate score
-    QuizAgent->>QuizAgent: Identify strengths and weaknesses
-
-    QuizAgent->>ReflectionAgent: QuizResultMessage
-    Note over QuizAgent,ReflectionAgent: Structured machine-readable message
-
-    ReflectionAgent->>RAG: Retrieve relevant lecture context
-    RAG-->>ReflectionAgent: Relevant document chunks
-
-    ReflectionAgent->>ReflectionAgent: Generate personalized reflection
-
-    ReflectionAgent-->>Student: Learning reflection
+    S->>Q: Submit quiz answers
+    Q->>Q: Evaluate answers
+    Q->>Q: Calculate score
+    Q->>Q: Identify strengths and weaknesses
+    Q->>R: Send QuizResultMessage
+    R->>K: Retrieve lecture context
+    K-->>R: Return relevant chunks
+    R->>R: Generate personalized reflection
+    R-->>S: Return personalized feedback
 ```
 
 ## QuizResultMessage Structure
