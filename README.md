@@ -1075,3 +1075,5 @@ The system combines semantic retrieval, multi-agent collaboration, and intellige
 By integrating modern AI frameworks such as LangChain, LangGraph, ChromaDB, Groq, and OpenRouter, the project showcases how multiple AI components can collaborate to create a scalable, modular, and intelligent learning assistant.
 
 Overall, StudyMate AI provides a strong foundation for future AI-powered educational systems and demonstrates how Agentic AI techniques can be applied to enhance personalized learning experiences.
+
+This project demonstrates how Agentic AI techniques can be applied to build intelligent educational applications using Retrieval-Augmented Generation (RAG), structured agent communication, and deliberate model selection.
