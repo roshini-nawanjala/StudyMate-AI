@@ -5,7 +5,7 @@ st.set_page_config(page_title="Quiz Generator", page_icon="📝", layout="wide")
 
 service = QuizService()
 
-st.title("📝 AI Quiz Generator")
+st.title("AI Quiz Generator")
 
 defaults = {
     "quiz": None,
@@ -30,7 +30,8 @@ latest_quiz_defaults = {
     "quiz_percentage": None,
     "quiz_status": None,
     "quiz_review": None,
-    "quiz_overall_performance_summary": None
+    "quiz_overall_performance_summary": None,
+    "quiz_agent_message": None
 }
 
 for k, v in latest_quiz_defaults.items():
@@ -51,6 +52,9 @@ def _store_latest_quiz(score_result, review=None):
     st.session_state.quiz_overall_performance_summary = (
         review.get("overall_learning_report", {}).get("overall_performance")
         if review else None
+    )
+    st.session_state.quiz_agent_message = service.create_reflection_message(
+        score_result, review
     )
 
 with st.sidebar:

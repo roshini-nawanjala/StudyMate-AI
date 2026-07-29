@@ -12,7 +12,7 @@ service = ReflectionService()
 if "document_uploaded" not in st.session_state:
     st.session_state.document_uploaded = False
 
-st.title("\U0001F4D8 AI Learning Reflection")
+st.title(" AI Learning Reflection")
 st.caption("Analyze your learning progress and receive personalized feedback.")
 
 provider = "auto"
@@ -47,14 +47,7 @@ if generate:
     with st.spinner("Analyzing your learning progress..."):
         result = service.generate_reflection(
             provider=provider,
-            quiz_score=st.session_state.get("quiz_score"),
-            total_questions=st.session_state.get("quiz_total"),
-            quiz_percentage=st.session_state.get("quiz_percentage"),
-            quiz_status=st.session_state.get("quiz_status"),
-            quiz_review=st.session_state.get("quiz_review"),
-            overall_performance_summary=st.session_state.get(
-                "quiz_overall_performance_summary"
-            )
+            quiz_message=st.session_state.get("quiz_agent_message")
         )
 
     if result["success"]:

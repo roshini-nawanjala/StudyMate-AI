@@ -86,7 +86,10 @@ STUDENT QUESTION
 Generate the best possible answer.
 """
 
-            llm = self.ai_provider.get_llm(provider)
+            llm = self.ai_provider.get_llm(
+                provider=provider,
+                task="question_answering"
+            )
 
             response = llm.invoke(prompt)
 

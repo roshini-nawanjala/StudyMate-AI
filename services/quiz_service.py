@@ -2,6 +2,7 @@ import json
 
 from rag.vector_store import VectorStore
 from agents.ai_provider import AIProvider
+from agents.messages import build_quiz_result_message
 
 
 class QuizService:
@@ -76,7 +77,7 @@ LECTURE NOTES
 {context}
 """
 
-            llm = self.ai_provider.get_llm(provider)
+            llm = self.ai_provider.get_llm(provider=provider, task="quiz")
 
             response = llm.invoke(prompt)
 
@@ -159,6 +160,11 @@ LECTURE NOTES
             "status": "PASS" if percentage >= 50 else "FAIL"
         }
 
+    @staticmethod
+    def create_reflection_message(score_result, review=None):
+        """Publish the Quiz Agent's result in the inter-agent protocol."""
+        return build_quiz_result_message(score_result, review)
+
     def review_quiz(self, quiz, answers, provider="auto"):
         """Generate one complete, structured review for the submitted quiz."""
         try:
@@ -220,7 +226,7 @@ QUIZ REVIEW DATA
 {json.dumps(review_input, ensure_ascii=False)}
 """
 
-            llm = self.ai_provider.get_llm(provider)
+            llm = self.ai_provider.get_llm(provider=provider, task="quiz")
             response = llm.invoke(prompt)
             content = response.content.strip()
 

@@ -2,6 +2,7 @@ import json
 
 from rag.vector_store import VectorStore
 from agents.ai_provider import AIProvider
+from agents.messages import QuizResultMessage
 
 
 class ReflectionService:
@@ -13,15 +14,16 @@ class ReflectionService:
     def generate_reflection(
         self,
         provider="auto",
-        quiz_score=None,
-        total_questions=None,
-        quiz_percentage=None,
-        quiz_status=None,
-        quiz_review=None,
-        overall_performance_summary=None
+        quiz_message=None
     ):
 
         try:
+
+            if not isinstance(quiz_message, QuizResultMessage):
+                return {
+                    "success": False,
+                    "message": "No QuizResultMessage was provided by the Quiz Agent."
+                }
 
             results = self.vector_store.collection.get()
 
@@ -36,42 +38,17 @@ class ReflectionService:
 
             text = "\n\n".join(documents)
 
-            llm = self.ai_provider.get_llm(provider)
-
-            if quiz_score is not None and total_questions is not None:
-                percentage = (
-                    quiz_percentage
-                    if quiz_percentage is not None
-                    else (quiz_score / total_questions) * 100
-                )
-                performance = f"""
-Quiz Performance:
-- Score: {quiz_score}/{total_questions}
-- Percentage: {percentage:.0f}%
-- Status: {quiz_status or ('PASS' if percentage >= 50 else 'FAIL')}
-"""
-            else:
-                performance = "Quiz Performance: Not Available"
-
-            review_context = ""
-            if quiz_review:
-                review_context = (
-                    "\nExisting AI Quiz Review (reuse these insights where relevant):\n"
-                    f"{json.dumps(quiz_review, ensure_ascii=False)}\n"
-                )
-            if overall_performance_summary:
-                review_context += (
-                    "\nOverall Performance Summary:\n"
-                    f"{overall_performance_summary}\n"
-                )
+            llm = self.ai_provider.get_llm(provider=provider, task="reflection")
 
             prompt = f"""
 You are an intelligent AI Study Coach.
 
-Analyze the following lecture notes and the student's quiz performance.
+The Quiz Agent has sent the following structured message. Use it directly;
+do not recalculate the score or rebuild the quiz analysis:
 
-{performance}
-{review_context}
+{json.dumps(quiz_message.to_dict(), ensure_ascii=False)}
+
+Analyze the following lecture notes in light of that message.
 
 Generate a personalized learning reflection using the following format.
 
