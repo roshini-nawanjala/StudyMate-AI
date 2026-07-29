@@ -206,18 +206,13 @@ sequenceDiagram
     Student->>QuizAgent: Submit quiz answers
 
     QuizAgent->>QuizAgent: Evaluate answers
-
     QuizAgent->>QuizAgent: Calculate score
-
     QuizAgent->>QuizAgent: Identify strengths and weaknesses
 
     QuizAgent->>ReflectionAgent: QuizResultMessage
-
-    Note over QuizAgent,ReflectionAgent:
-    Structured machine-readable message
+    Note over QuizAgent,ReflectionAgent: Structured machine-readable message
 
     ReflectionAgent->>RAG: Retrieve relevant lecture context
-
     RAG-->>ReflectionAgent: Relevant document chunks
 
     ReflectionAgent->>ReflectionAgent: Generate personalized reflection
