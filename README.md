@@ -5,7 +5,6 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.46-red?style=for-the-badge&logo=streamlit)
 ![LangChain](https://img.shields.io/badge/LangChain-Agentic-green?style=for-the-badge)
-![LangGraph](https://img.shields.io/badge/LangGraph-Workflow-orange?style=for-the-badge)
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorDB-purple?style=for-the-badge)
 ![RAG](https://img.shields.io/badge/RAG-Enabled-success?style=for-the-badge)
 
@@ -94,7 +93,7 @@ The system is designed for an end-to-end learning workflow: upload, index, retri
 | Programming Language | Python 3.12 | Core application development |
 | Frontend | Streamlit | Interactive web-based user interface |
 | AI Framework | LangChain | Prompt orchestration and LLM integration |
-| Agent Framework | LangGraph | Multi-agent workflow orchestration |
+| Agent Architecture | Custom Multi-Agent Architecture | Service-layer orchestration with structured agent communication  |
 | Large Language Models | Groq | Fast generation for summaries and quizzes |
 | Large Language Models | OpenRouter | Reasoning-intensive question answering and learning reflections |
 | Retrieval Architecture | Retrieval-Augmented Generation (RAG) | Ground AI responses using uploaded lecture notes |
@@ -377,7 +376,6 @@ StudyMate-AI/
 ├── tests/                      # Project testing modules
 ├── utils/                      # Helper functions
 ├── app.py                      # Main Streamlit application
-├── Home.py                     # Landing page
 ├── config.py                   # Project configuration
 ├── requirements.txt            # Python dependencies
 ├── .env.example                # Environment variables template

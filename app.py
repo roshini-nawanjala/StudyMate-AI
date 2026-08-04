@@ -71,11 +71,13 @@ def app_page():
 
     st.markdown("---")
 
-    st.caption("Version 1.0 | Powered by Streamlit, LangGraph, Groq and ChromaDB")
-
+    st.caption(
+    "Version 1.0 | Powered by Streamlit, LangChain, Groq, OpenRouter and ChromaDB"
+    )
+ 
 
 pages = [
-    st.Page(app_page, title="app", default=True),
+    st.Page(app_page, title="Home", default=True),
     st.Page("pages/Upload.py", title="Upload"),
     st.Page("pages/Summary.py", title="Summary"),
     st.Page("pages/Ask_AI.py", title="Ask AI"),
